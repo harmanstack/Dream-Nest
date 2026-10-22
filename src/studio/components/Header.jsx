@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Home,
@@ -8,10 +7,15 @@ import {
   Sparkles,
   Layers,
   ArrowLeft,
+  Save,
+  Check,
 } from 'lucide-react';
 
 export const Header = ({
   elements,
+  projectName,
+  hasUnsavedChanges,
+  onSaveProject,
   onClearPlan,
   onResetStarterPlan,
   onOpenShortcuts,
@@ -52,7 +56,7 @@ export const Header = ({
                 2D Floor Plan
               </span>
             </div>
-            <p className="text-[10px] text-[#64748b]">Smart Room & Furniture Designer</p>
+            <p className="text-[10px] text-[#64748b]">{projectName || 'Smart Room & Furniture Designer'}</p>
           </div>
         </div>
       </div>
@@ -71,6 +75,29 @@ export const Header = ({
 
       {/* Right project actions */}
       <div className="flex items-center gap-2">
+        {projectName && (
+          <>
+            <span className={`hidden sm:inline-flex items-center gap-1.5 text-[11px] font-medium ${hasUnsavedChanges ? 'text-amber-700' : 'text-emerald-700'}`}>
+              {hasUnsavedChanges ? (
+                <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
+              ) : (
+                <Check className="h-3.5 w-3.5" />
+              )}
+              {hasUnsavedChanges ? 'Unsaved changes' : 'All changes saved'}
+            </span>
+            <button
+              type="button"
+              onClick={onSaveProject}
+              disabled={!hasUnsavedChanges}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#2563eb] hover:bg-[#1d4ed8] disabled:bg-[#e2e8f0] disabled:text-[#94a3b8] text-white text-xs font-semibold border border-[#2563eb] disabled:border-[#e2e8f0] transition-colors"
+              title={hasUnsavedChanges ? 'Save project changes' : 'All changes are saved'}
+            >
+              <Save className="w-3.5 h-3.5" />
+              <span>Save</span>
+            </button>
+          </>
+        )}
+
         <button
           type="button"
           onClick={onResetStarterPlan}

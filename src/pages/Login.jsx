@@ -1,208 +1,65 @@
-// ========================================
-// DREAMNEST LOGIN PAGE
-// ========================================
-
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import LoginLayout, { LoginMessage } from '../components/LoginLayout';
+import PasswordField from '../components/PasswordField';
 
 function Login() {
+  const [identifier, setIdentifier] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  // Navigation function
-  const navigate = useNavigate();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setError('');
+
+    const normalizedIdentifier = identifier.trim();
+    if (!normalizedIdentifier || !password) {
+      setError('Enter your email or user ID and password.');
+      return;
+    }
+
+    if (normalizedIdentifier.includes('@') && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedIdentifier)) {
+      setError('Enter a valid email address or user ID.');
+      return;
+    }
+
+    setError('Login is unavailable because no authentication service is connected. No account has been signed in.');
+  };
 
   return (
-
-    <div className="login-page">
-
-      {/* ========================================
-          LEFT SIDE - BRANDING
-      ======================================== */}
-      <div className="login-showcase">
-
-        <div className="showcase-content">
-
-          <div className="login-brand">
-            <span>⌂</span>
-            DreamNest
-          </div>
-
-          <span className="login-eyebrow">
-            ● DESIGN YOUR DREAM
-          </span>
-
-          <h1>
-            Your dream home
-            <span> starts here.</span>
-          </h1>
-
-          <p>
-            Explore ideas, create floor plans, arrange furniture,
-            and bring your vision to life with DreamNest.
-          </p>
-
-          {/* Small visual */}
-          <div className="mini-plan">
-
-            <div className="mini-room room-one">
-              Living Room
-            </div>
-
-            <div className="mini-room room-two">
-              Bedroom
-            </div>
-
-            <div className="mini-room room-three">
-              Kitchen
-            </div>
-
-          </div>
-
+    <LoginLayout
+      eyebrow="WELCOME BACK"
+      title="Login to DreamNest"
+      description="Continue designing your perfect home."
+    >
+      <LoginMessage>{error}</LoginMessage>
+      <form onSubmit={handleSubmit}>
+        <div className="login-field">
+          <label htmlFor="login-email">Email address or user ID</label>
+          <input
+            id="login-email"
+            name="identifier"
+            type="text"
+            placeholder="you@example.com"
+            autoComplete="username"
+            value={identifier}
+            onChange={(event) => setIdentifier(event.target.value)}
+            required
+          />
         </div>
 
-      </div>
+        <PasswordField
+          id="login-password"
+          label="Password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+        />
 
-
-      {/* ========================================
-          RIGHT SIDE - LOGIN FORM
-      ======================================== */}
-      <div className="login-form-area">
-
-        <div className="login-card">
-
-          {/* Close / Back button */}
-          <button
-            className="login-close"
-            onClick={() => navigate("/")}
-          >
-            ×
-          </button>
-
-
-          {/* Heading */}
-          <div className="login-heading">
-
-            <span>
-              WELCOME BACK
-            </span>
-
-            <h2>
-              Login to DreamNest
-            </h2>
-
-            <p>
-              Continue designing your perfect home.
-            </p>
-
-          </div>
-
-
-          {/* ========================================
-              LOGIN FORM
-          ======================================== */}
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-
-              // Evaluation 1 navigation
-              navigate("/studio");
-            }}
-          >
-
-            {/* Email */}
-            <div className="login-field">
-
-              <label>
-                Email address
-              </label>
-
-              <input
-                type="email"
-                placeholder="you@example.com"
-                required
-              />
-
-            </div>
-
-
-            {/* Password */}
-            <div className="login-field">
-
-              <div className="password-row">
-
-                <label>
-                  Password
-                </label>
-
-                <button
-                  type="button"
-                  className="forgot-password"
-                >
-                  Forgot password?
-                </button>
-
-              </div>
-
-              <input
-                type="password"
-                placeholder="Enter your password"
-                required
-              />
-
-            </div>
-
-
-            {/* Remember me */}
-            <label className="remember-me">
-
-              <input
-                type="checkbox"
-              />
-
-              <span>
-                Remember me
-              </span>
-
-            </label>
-
-
-            {/* Login */}
-            <button
-              type="submit"
-              className="login-main-button"
-            >
-              Login
-              <span>→</span>
-            </button>
-
-          </form>
-
-
-          {/* Signup */}
-          <div className="login-signup">
-
-            Don't have an account?
-
-            <button
-              onClick={() => navigate("/signup")}
-            >
-              Create one
-            </button>
-
-          </div>
-
-
-          {/* Back home */}
-          <button
-            className="login-back"
-            onClick={() => navigate("/")}
-          >
-            ← Back to DreamNest
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
+        <button className="login-main-button" type="submit">
+          <span>Login</span>
+          <span>→</span>
+        </button>
+      </form>
+    </LoginLayout>
   );
 }
 
