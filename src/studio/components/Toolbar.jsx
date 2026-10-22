@@ -150,6 +150,7 @@ export const Toolbar = ({
           </button>
 
           <button
+          
             type="button"
             onClick={onResetView}
             className="p-1.5 rounded-lg text-[#64748b] hover:text-[#2563eb] hover:bg-[#eff6ff] transition-colors"
