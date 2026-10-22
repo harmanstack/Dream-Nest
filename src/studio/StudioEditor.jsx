@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useFloorPlan } from './hooks/useFloorPlan';
 import { useCanvasTransform } from './hooks/useCanvasTransform';
 import { Header } from './components/Header';
@@ -8,10 +8,18 @@ import { Canvas2D } from './components/Canvas2D';
 import { PropertiesPanel } from './components/PropertiesPanel';
 import { KeyboardShortcutsModal } from './components/KeyboardShortcutsModal';
 import { snapToGridValue } from './utils/geometry';
+import { INITIAL_ELEMENTS } from './data/initialPlan';
+import { saveProjectPlan } from '../projects/projectStore';
 
-export function StudioEditor() {
+export function StudioEditor({
+  projectId,
+  projectName,
+  initialElements = INITIAL_ELEMENTS,
+  savedProjectElements = [],
+}) {
   const [snapToGrid, setSnapToGrid] = useState(true);
   const [isShortcutsOpen, setIsShortcutsOpen] = useState(false);
+  const [saveError, setSaveError] = useState('');
 
   const canvasWidth = 1000;
   const canvasHeight = 650;
@@ -39,12 +47,25 @@ export function StudioEditor() {
     sendBackward,
     clearPlan,
     resetStarterPlan,
-    loadPlan,
     undo,
     redo,
     canUndo,
     canRedo,
-  } = useFloorPlan();
+  } = useFloorPlan(initialElements || INITIAL_ELEMENTS);
+
+  const [savedElements, setSavedElements] = useState(() => JSON.stringify(savedProjectElements));
+  const hasUnsavedChanges = Boolean(projectId) && JSON.stringify(elements) !== savedElements;
+
+  const handleSaveProject = () => {
+    if (!projectId) return;
+    try {
+      saveProjectPlan(projectId, elements);
+      setSavedElements(JSON.stringify(elements));
+      setSaveError('');
+    } catch (error) {
+      setSaveError(error.message || 'Your project could not be saved.');
+    }
+  };
 
   const {
     zoom,
@@ -205,10 +226,18 @@ export function StudioEditor() {
       {/* Top Header */}
       <Header
         elements={elements}
+        projectName={projectName}
+        hasUnsavedChanges={hasUnsavedChanges}
+        onSaveProject={handleSaveProject}
         onClearPlan={clearPlan}
         onResetStarterPlan={resetStarterPlan}
         onOpenShortcuts={() => setIsShortcutsOpen(true)}
       />
+      {saveError && (
+        <div className="absolute left-1/2 top-[72px] z-50 -translate-x-1/2 rounded-lg border border-red-200 bg-white px-4 py-2 text-xs font-medium text-red-700 shadow-lg" role="alert">
+          {saveError}
+        </div>
+      )}
 
       {/* Primary Toolbar */}
       <Toolbar
