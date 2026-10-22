@@ -14,3 +14,9 @@ The React Compiler is not enabled on this template because of its impact on dev 
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## Login page
+
+The login screen is retained for the existing design, but no authentication provider or backend is currently connected. Submitting the form displays a message explaining that login is unavailable; the app does not simulate a successful sign-in. The Projects and Studio features remain accessible without logging in.
+
+To add a working login system later, choose an authentication provider or backend and connect it before enabling sign-in.

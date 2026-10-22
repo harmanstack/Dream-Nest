@@ -2,12 +2,12 @@ import { useState, useCallback, useMemo } from 'react';
 import { INITIAL_ELEMENTS } from '../data/initialPlan';
 import { generateId, snapToGridValue, constrainElementPosition } from '../utils/geometry';
 
-export function useFloorPlan() {
-  const [elements, setElements] = useState(INITIAL_ELEMENTS);
-  const [selectedId, setSelectedId] = useState('sofa-1');
+export function useFloorPlan(initialElements = INITIAL_ELEMENTS) {
+  const [elements, setElements] = useState(initialElements);
+  const [selectedId, setSelectedId] = useState(initialElements[0]?.id || null);
 
   // History stack for Undo / Redo
-  const [history, setHistory] = useState([INITIAL_ELEMENTS]);
+  const [history, setHistory] = useState([initialElements]);
   const [historyIndex, setHistoryIndex] = useState(0);
 
   const pushHistory = useCallback((newElements) => {

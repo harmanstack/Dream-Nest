@@ -1443,26 +1443,6 @@ img {
   box-sizing: border-box;
 }
 
-.password-label {
-  display: flex;
-
-  justify-content: space-between;
-
-  align-items: center;
-}
-
-.forgot-password {
-  background: none;
-
-  border: none;
-
-  color: #2563eb;
-
-  cursor: pointer;
-
-  font-size: 13px;
-}
-
 .login-button {
   width: 100%;
 
@@ -1494,28 +1474,6 @@ img {
   transform: translateY(-2px);
 
   background: #1d4ed8;
-}
-
-.signup-text {
-  text-align: center;
-
-  margin-top: 25px;
-
-  color: #64748b;
-}
-
-.signup-text button {
-  margin-left: 5px;
-
-  border: none;
-
-  background: none;
-
-  color: #2563eb;
-
-  cursor: pointer;
-
-  font-weight: 600;
 }
 
 .back-home {
@@ -2372,36 +2330,6 @@ img {
     0 0 0 3px rgba(37, 99, 235, 0.08);
 }
 
-.forgot-password {
-  border: none;
-
-  background: none;
-
-  color: #2563eb;
-
-  font-size: 12px;
-
-  cursor: pointer;
-}
-
-.remember-me {
-  display: flex;
-
-  align-items: center;
-
-  gap: 8px;
-
-  margin-top: 20px;
-
-  color: #64748b;
-
-  font-size: 13px;
-}
-
-.remember-me input {
-  accent-color: #2563eb;
-}
-
 
 /* =========================================================
    MAIN LOGIN BUTTON
@@ -2446,34 +2374,6 @@ img {
     0 10px 30px rgba(37, 99, 235, 0.2);
 }
 
-
-/* =========================================================
-   LOGIN SIGNUP
-========================================================= */
-
-.login-signup {
-  text-align: center;
-
-  margin-top: 25px;
-
-  color: #64748b;
-
-  font-size: 14px;
-}
-
-.login-signup button {
-  border: none;
-
-  background: none;
-
-  color: #2563eb;
-
-  font-weight: 600;
-
-  cursor: pointer;
-
-  margin-left: 5px;
-}
 
 .login-back {
   display: block;
@@ -2731,5 +2631,124 @@ img {
 
   .studio-page h1 {
     font-size: 34px;
+  }
+}
+
+/* Login layout adapts the existing two-column account-screen styling. */
+.login-screen {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: minmax(0, 1fr) minmax(430px, .82fr);
+  align-items: stretch;
+  justify-content: stretch;
+  padding: 0;
+}
+
+.login-screen .login-showcase {
+  min-width: 0;
+}
+
+.login-screen .login-form-area {
+  min-width: 0;
+  min-height: 100vh;
+}
+
+.login-screen .login-form-card {
+  max-height: none;
+  overflow: visible;
+}
+
+.login-brand-button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+}
+
+.login-form-card .login-heading {
+  margin-bottom: 21px;
+}
+
+.login-form-card .login-heading h2 {
+  font-size: 30px;
+}
+
+.login-form-card .login-field {
+  margin-top: 18px;
+}
+
+.login-form-card .login-field label {
+  margin-bottom: 7px;
+}
+
+.login-form-card .login-field input {
+  padding: 12px 14px;
+}
+
+.login-password-control {
+  position: relative;
+}
+
+.login-form-card .login-password-control input {
+  padding-right: 48px;
+}
+
+.login-password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 7px;
+  display: grid;
+  width: 34px;
+  height: 34px;
+  transform: translateY(-50%);
+  place-items: center;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #718096;
+}
+
+.login-password-toggle:hover {
+  background: #eaf2ff;
+  color: #2563eb;
+}
+
+.login-message-error {
+  margin: 15px 0 2px;
+  padding: 10px 12px;
+  border: 1px solid #f3c3c3;
+  border-radius: 7px;
+  background: #fff4f4;
+  color: #a83232;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.login-form-card .login-main-button {
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+@media (max-width: 900px) {
+  .login-screen {
+    grid-template-columns: 1fr;
+  }
+
+  .login-screen .login-form-area {
+    min-height: 100vh;
+  }
+}
+
+@media (max-width: 500px) {
+  .login-screen .login-form-area {
+    min-height: 100svh;
+    align-items: flex-start;
+    padding: 20px;
+  }
+
+  .login-screen .login-form-card {
+    padding: 37px 25px;
   }
 }
