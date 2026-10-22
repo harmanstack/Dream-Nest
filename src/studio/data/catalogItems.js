@@ -2,7 +2,6 @@ export const CATALOG_ITEMS = [
   // --- Living Room ---
   {
     type: 'sofa',
-    
     name: 'Sofa',
     category: 'living',
     defaultWidth: 150,
