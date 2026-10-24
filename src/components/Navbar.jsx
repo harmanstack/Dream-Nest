@@ -18,6 +18,12 @@ function Navbar() {
         <a onClick={() => navigate("/about")} style={{ cursor: "pointer" }}>About</a>
         <a onClick={() => navigate("/contact")} style={{ cursor: "pointer" }}>Contact</a>
         <button className="login-nav-button" onClick={() => navigate("/login")}>Login</button>
+        <button
+  className="nav-button"
+  onClick={() => navigate("/furniture")}
+>
+  Furniture Explorer
+</button>
         <button className="nav-button" onClick={() => navigate("/studio")}>Open Studio</button>
       </div>
     </nav>
