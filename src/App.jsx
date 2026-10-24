@@ -11,6 +11,7 @@ import Hero from "./components/Hero";
 import Features from "./components/Features";
 import Steps from "./components/Steps";
 import CTA from "./components/CTA";
+import FurnitureExplorer from "./pages/FurnitureExplorer";
 
 // Pages
 import Studio from "./pages/Studio";
@@ -68,8 +69,18 @@ function App() {
         <Route path="/DreamNest/projects" element={<Projects />} />
         <Route path="/DreamNest/studio" element={<Studio />} />
         <Route path="/DreamNest/studio/:projectId" element={<Studio />} />
+        
 
         <Route path="*" element={<Home />} />
+
+        <Route
+  path="/furniture"
+  element={<FurnitureExplorer />}
+     />
+        <Route
+  path="/DreamNest/furniture"
+  element={<FurnitureExplorer />}
+/>
       </Routes>
     </HashRouter>
   );
