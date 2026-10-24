@@ -73,7 +73,6 @@ function App() {
         
 
         <Route path="*" element={<Home />} />
-<<<<<<< HEAD
         <Route
           path="/templates"
           element={<FloorPlanTemplates />}
@@ -83,7 +82,7 @@ function App() {
           path="/DreamNest/templates"
           element={<FloorPlanTemplates />}
         />
-=======
+
 
         <Route
   path="/furniture"
@@ -93,7 +92,6 @@ function App() {
   path="/DreamNest/furniture"
   element={<FurnitureExplorer />}
 />
->>>>>>> origin/aarchi
       </Routes>
     </HashRouter>
   );
