@@ -135,6 +135,18 @@ function Projects() {
           <LayoutGrid size={18} />
           <span>Open studio</span>
         </button>
+        
+        
+        <button
+          className="sidebar-link"
+          onClick={() => navigate('/templates')}
+          type="button"
+>
+        <House size={18} />
+        <span>Floor Plan Templates</span>
+        </button>
+
+
 
         <div className="sidebar-tip">
           <div className="sidebar-tip-icon"><FolderKanban size={18} /></div>
