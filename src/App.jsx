@@ -1,4 +1,5 @@
 // React Router
+
 import {
   HashRouter,
   Routes,
@@ -11,6 +12,7 @@ import Hero from "./components/Hero";
 import Features from "./components/Features";
 import Steps from "./components/Steps";
 import CTA from "./components/CTA";
+import FurnitureExplorer from "./pages/FurnitureExplorer";
 
 // Pages
 import Studio from "./pages/Studio";
@@ -18,7 +20,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Projects from "./pages/Projects";
-
+import FloorPlanTemplates from "./pages/FloorPlanTemplates";
 // CSS
 import "./App.css";
 
@@ -68,11 +70,32 @@ function App() {
         <Route path="/DreamNest/projects" element={<Projects />} />
         <Route path="/DreamNest/studio" element={<Studio />} />
         <Route path="/DreamNest/studio/:projectId" element={<Studio />} />
+        
 
         <Route path="*" element={<Home />} />
+        <Route
+          path="/templates"
+          element={<FloorPlanTemplates />}
+        />
+
+        <Route
+          path="/DreamNest/templates"
+          element={<FloorPlanTemplates />}
+        />
+
+
+        <Route
+  path="/furniture"
+  element={<FurnitureExplorer />}
+     />
+        <Route
+  path="/DreamNest/furniture"
+  element={<FurnitureExplorer />}
+/>
       </Routes>
     </HashRouter>
   );
 }
+
 
 export default App;
