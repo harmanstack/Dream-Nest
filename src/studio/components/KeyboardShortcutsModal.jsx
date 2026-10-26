@@ -5,6 +5,7 @@ export const KeyboardShortcutsModal = ({
   isOpen,
   onClose,
 }) => {
+  
   if (!isOpen) return null;
 
   const shortcuts = [
